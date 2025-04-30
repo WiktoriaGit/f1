@@ -1,5 +1,5 @@
 // === KONFIGURACJA ===
-const BACKEND_URL = "http://localhost:8000"; // ← LOKALNY BACKEND (Docker)
+const BACKEND_URL = "https://158f-37-47-71-1.ngrok-free.app"; // ← NGROK LINK
 
 // Obsługa logowania użytkownika
 document.getElementById("loginForm")?.addEventListener("submit", async function (event) {
