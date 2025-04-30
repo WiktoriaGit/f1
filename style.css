@@ -1,0 +1,96 @@
+/* ========== OGÓLNE STYLOWANIE ========== */
+body {
+    background-color: #f0f0f0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 40px;
+}
+
+form {
+    display: inline-block;
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* ========== POLA TEKSTOWE ========== */
+input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+}
+
+/* ========== PRZYCISKI ========== */
+button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+    button[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+
+/* ========== PODŒWIETLANIE WYMAGAÑ HAS£A ========== */
+#passwordChecklist p {
+    color: #444;
+    margin: 4px 0;
+    font-size: 14px;
+}
+
+    #passwordChecklist p.valid {
+        color: green;
+    }
+
+/* ========== INFORMACJA O ZGODNOŒCI HASE£ ========== */
+#passwordMatch {
+    color: gray;
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+    #passwordMatch.valid {
+        color: green;
+    }
+
+    #passwordMatch.invalid {
+        color: red;
+    }
+
+/* ========== POLE Z IKON¥ (HAS£O Z LUPK¥) ========== */
+.input-with-icon {
+    position: relative;
+    margin-bottom: 12px;
+}
+
+    .input-with-icon input {
+        padding: 10px 36px 10px 12px;
+    }
+
+.show-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    user-select: none;
+    font-size: 16px;
+}

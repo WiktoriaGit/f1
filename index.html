@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Logowanie - Wirtualne Muzeum VR</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form id="loginForm">
+        <h2>Zaloguj się</h2>
+        <input type="text" id="username" placeholder="Nazwa użytkownika" required><br>
+        <input type="password" id="password" placeholder="Hasło" required><br>
+        <button type="submit">Zaloguj</button>
+    </form>
+
+    <hr style="margin: 40px 0;">
+
+    <form id="registerForm">
+        <h2>Zarejestruj się</h2>
+
+        <div class="input-with-icon">
+            <input type="text" id="newUsername" placeholder="Nazwa użytkownika" required>
+            <span class="show-icon" style="visibility: hidden;">🔍</span>
+        </div>
+
+        <div class="input-with-icon">
+            <input type="password" id="newPassword" placeholder="Hasło" required>
+            <span class="show-icon"
+                  onmousedown="showPassword('newPassword')"
+                  onmouseup="hidePassword('newPassword')"
+                  onmouseleave="hidePassword('newPassword')">🔍</span>
+        </div>
+
+        <div class="input-with-icon">
+            <input type="password" id="confirmPassword" placeholder="Powtórz hasło" required
+                   oninput="checkPasswordMatch()">
+            <span class="show-icon"
+                  onmousedown="showPassword('confirmPassword')"
+                  onmouseup="hidePassword('confirmPassword')"
+                  onmouseleave="hidePassword('confirmPassword')">🔍</span>
+        </div>
+
+        <button type="submit">Zarejestruj</button>
+
+
+        <div id="passwordChecklist">
+            <p id="length">Min. 8 znaków</p>
+            <p id="lowercase">Mała litera (a–z)</p>
+            <p id="uppercase">Duża litera (A–Z)</p>
+            <p id="digit">Cyfra (0–9)</p>
+            <p id="special">Znak specjalny (!@#$...)</p>
+        </div>
+
+
+    </form>
+
+    <script src="script.js"></script>
+</body>
+</html>

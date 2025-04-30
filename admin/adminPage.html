@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel Administratora</title>
+  <link rel="stylesheet" href="astyle.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="logo">Muzeum VR - panel Administratora</span>
+    </div>
+    <div class="topbar-right">
+      <div class="profile">
+        <span class="username">admin</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="admin-wrapper">
+    <aside class="sidebar">
+      <nav>
+        <button onclick="showPanel('exhibits')">Eksponaty</button>
+        <button onclick="showPanel('users')">Użytkownicy</button>
+        <button onclick="showPanel('qrcodes')">Kody QR</button>
+        <button onclick="showPanel('stats')">Statystyki</button>
+        <button onclick="showPanel('settings')">Ustawienia</button>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <div id="panel-exhibits" class="admin-panel">
+    
+        <div class="accordion">
+    
+          <!-- 📋 Lista eksponatów -->
+<button class="accordion-toggle" onclick="toggleSection('list')">📋 Lista eksponatów</button>
+<div id="section-list" class="accordion-content">
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nazwa</th>
+        <th>Opis</th>
+        <th>Model</th>
+      </tr>
+    </thead>
+    <tbody id="exhibitTableBody">
+      <!-- Wiersze zostaną dodane dynamicznie przez JS -->
+    </tbody>
+  </table>
+</div>
+    
+          
+          <!-- ➕ Dodaj nowe dzieło -->
+<button class="accordion-toggle" onclick="toggleSection('add')">➕ Dodaj nowe dzieło</button>
+<div id="section-add" class="accordion-content">
+  <form id="addExhibitForm">
+    <label>Tytuł: <input type="text" name="title" required /></label><br><br>
+    <label>Opis: <textarea name="description" required></textarea></label><br><br>
+    <label>Model URL (.glb): <input type="text" name="model" /></label><br><br>
+    <button type="submit">Dodaj eksponat</button>
+  </form>
+</div>
+
+<!-- ✏️ Edytuj dzieło -->
+<button class="accordion-toggle" onclick="toggleSection('edit')">✏️ Edytuj dzieło</button>
+<div id="section-edit" class="accordion-content">
+  <form id="editExhibitForm" enctype="multipart/form-data">
+    <label>ID dzieła: <input type="number" name="id" required /></label><br><br>
+    <label>Nowy tytuł: <input type="text" name="title" /></label><br><br>
+    <label>Nowy opis: <textarea name="description" ></textarea></label><br><br>
+    <label>Nowy model URL (.glb): <input type="text" name="model"  /></label><br><br>
+    <button type="submit">Zapisz zmiany</button>
+  </form>
+</div>
+
+    
+     
+          <button class="accordion-toggle" onclick="toggleSection('delete')">🗑️ Usuń dzieło</button>
+          <div id="section-delete" class="accordion-content">
+            <form id="deleteExhibitForm">
+  <label>ID eksponatu do usunięcia:
+    <input type="number" name="id" required />
+  </label><br><br>
+  <button type="submit" class="delete-btn">🗑️ Usuń eksponat</button>
+</form>
+
+          </div>
+    
+        </div>
+    
+      </div>
+
+      <div id="panel-users" class="admin-panel">
+        <div class="accordion">
+      
+          <!-- 📋 Lista użytkowników -->
+          <button class="accordion-toggle" onclick="toggleSection('users-list')">📋 Lista użytkowników</button>
+          <div id="section-users-list" class="accordion-content">
+ <table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Login</th>
+      <th>Rola</th>
+    </tr>
+  </thead>
+  <tbody id="userTableBody">
+    <!-- dane będą ładowane dynamicznie -->
+  </tbody>
+</table>
+
+          </div>
+      
+          <!-- ➕ Dodaj użytkownika -->
+          <button class="accordion-toggle" onclick="toggleSection('users-add')">➕ Dodaj użytkownika</button>
+          <div id="section-users-add" class="accordion-content">
+            <form id="addUserForm">
+  <label>Login: <input type="text" name="username" required /></label><br><br>
+  <label>Hasło: <input type="password" name="password" required /></label><br><br>
+  <label>Rola:
+    <select name="role">
+      <option value="user">user</option>
+      <option value="admin">admin</option>
+    </select>
+  </label><br><br>
+  <button type="submit">Dodaj użytkownika</button>
+</form>
+
+          </div>
+      
+          <!-- ✏️ Edytuj użytkownika -->
+          <button class="accordion-toggle" onclick="toggleSection('users-edit')">✏️ Edytuj użytkownika</button>
+          <div id="section-users-edit" class="accordion-content">
+            <form id="editUserForm">
+              <label>ID użytkownika: <input type="number" name="id" required /></label><br><br>
+              <label>Nowe hasło: <input type="password" name="password" /></label><br><br>
+              <label>Nowa rola:
+                <select name="role">
+                  <option value="">Nie zmieniaj</option>
+                  <option value="user">user</option>
+                  <option value="admin">admin</option>
+                </select>
+              </label><br><br>
+              <button type="submit">Zapisz zmiany</button>
+            </form>
+          </div>
+      
+          <!-- 🗑️ Usuń użytkownika -->
+          <button class="accordion-toggle" onclick="toggleSection('users-delete')">🗑️ Usuń użytkownika</button>
+          <div id="section-users-delete" class="accordion-content">
+            <form id="deleteUserForm">
+  <label>ID użytkownika do usunięcia:
+    <input type="number" name="id" required />
+  </label><br><br>
+  <button type="submit" class="delete-btn">🗑️ Usuń użytkownika</button>
+</form>
+
+          </div>
+      
+        </div>
+      </div>
+      
+
+      <div id="panel-qrcodes" class="admin-panel">
+        <div class="accordion">
+      
+          <!-- 📋 Lista kodów QR -->
+          <button class="accordion-toggle" onclick="toggleSection('qr-list')">📋 Lista kodów QR</button>
+          <div id="section-qr-list" class="accordion-content">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>ID dzieła</th>
+                  <th>Link do modelu</th>
+                  <th>Kod QR</th>
+                </tr>
+              </thead>
+              <tbody id="qrTableBody">
+                <tr>
+                  <td>1</td>
+                  <td>https://wm-frontend-one.vercel.app/view.html?id=1</td>
+                  <td><button onclick="previewQR(1)">🔍 Pokaż</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+      
+          <!-- 👁️ Podgląd QR -->
+          <button class="accordion-toggle" onclick="toggleSection('qr-preview')">👁️ Podgląd kodu QR</button>
+          <div id="section-qr-preview" class="accordion-content">
+            <div id="qrDisplayArea">
+              <p>Wybierz kod QR z listy, aby go zobaczyć.</p>
+            </div>
+          </div>
+      
+        </div>
+      </div>
+      
+      <div id="panel-stats" class="admin-panel">
+        <div class="accordion">
+      
+          <!-- 📊 Statystyki -->
+          <button class="accordion-toggle" onclick="toggleSection('stats-overview')">📊 Statystyki ogólne</button>
+          <div id="section-stats-overview" class="accordion-content">
+            <div class="stats-grid">
+              <div class="stat-box">
+                <h3>👤 Użytkownicy</h3>
+                <p id="stat-users">–</p>
+              </div>
+              <div class="stat-box">
+                <h3>🖼️ Eksponaty</h3>
+                <p id="stat-exhibits">–</p>
+              </div>
+              <div class="stat-box">
+                <h3>📦 Kody QR</h3>
+                <p id="stat-qr">–</p>
+              </div>
+            </div>
+          </div>
+      
+        </div>
+      </div>
+      
+
+      <div id="panel-settings" class="admin-panel">
+        <div class="accordion">
+      
+          <!-- 🔐 Zmiana hasła -->
+          <button class="accordion-toggle" onclick="toggleSection('settings-password')">🔐 Zmień hasło</button>
+          <div id="section-settings-password" class="accordion-content">
+            <form id="changePasswordForm">
+              <label>Stare hasło: <input type="password" name="old_password" required /></label><br><br>
+              <label>Nowe hasło: <input type="password" name="new_password" required /></label><br><br>
+              <label>Powtórz nowe hasło: <input type="password" name="repeat_password" required /></label><br><br>
+              <button type="submit">Zmień hasło</button>
+            </form>
+          </div>
+      
+          <!-- 🚪 Wyloguj -->
+          <button class="accordion-toggle" onclick="toggleSection('settings-logout')">🚪 Wyloguj się</button>
+          <div id="section-settings-logout" class="accordion-content">
+            <button onclick="logout()" class="delete-btn">Wyloguj mnie</button>
+          </div>
+      
+        </div>
+      </div>
+      
+
+
+    </main>
+    
+  </div>
+
+  <script src="ascript.js"></script>
+</body>
+</html>

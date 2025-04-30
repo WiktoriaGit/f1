@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Dzieło Sztuki 3D</title>
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <script src="script.js"></script>
+  <style>
+    body {
+      text-align: center;
+      font-family: sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f7f7f7;
+    }
+
+    model-viewer {
+      width: 100%;
+      height: 500px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1 id="title">Ładowanie dzieła...</h1>
+  <p id="description"></p>
+
+  <model-viewer
+    id="viewer"
+    ar
+    ar-modes="scene-viewer webxr"
+    ar-scale="auto"
+    quick-look-browsers="chrome"
+    camera-controls
+    auto-rotate
+    alt="Model 3D dzieła sztuki"
+    src="">
+  </model-viewer>
+
+  <script>
+    // Sprawdzenie logowania
+    checkAuthAndRedirect();
+
+    const token = localStorage.getItem("token");
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+
+    fetch(`https://wm-backend-g4xy.onrender.com/exhibit/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    .then(res => {
+      if (!res.ok) throw new Error(`Błąd HTTP: ${res.status}`);
+      return res.json();
+    })
+    .then(data => {
+      document.getElementById("title").innerText = data.title;
+      document.getElementById("description").innerText = data.description;
+      document.getElementById("viewer").setAttribute("src", data.model_path);
+    })
+    .catch(err => {
+      console.error("Błąd wczytywania danych:", err);
+      document.getElementById("title").innerText = "Nie udało się załadować dzieła.";
+    });
+  </script>
+</body>
+</html>
