@@ -1,5 +1,5 @@
 // === KONFIGURACJA ===
-const BACKEND_URL = "https://158f-37-47-71-1.ngrok-free.app"; // Adres z ngrok
+const BACKEND_URL = "https://403b-37-47-71-1.ngrok-free.app"; // Adres z ngrok
 
 // Obsługa logowania użytkownika
 document.getElementById("loginForm")?.addEventListener("submit", async function (event) {
