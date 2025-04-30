@@ -8,11 +8,14 @@ document.getElementById("loginForm")?.addEventListener("submit", async function 
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
 
+    const formData = new FormData();
+    formData.append("username", username);
+    formData.append("password", password);
+
     try {
         const response = await fetch(`${BACKEND_URL}/login`, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ username, password })
+            body: formData
         });
 
         if (!response.ok) {
