@@ -1,3 +1,6 @@
+// === KONFIGURACJA ===
+const BACKEND_URL = "http://localhost:8000"; // ← LOKALNY BACKEND (Docker)
+
 // Obsługa logowania użytkownika
 document.getElementById("loginForm")?.addEventListener("submit", async function (event) {
     event.preventDefault();
@@ -6,31 +9,24 @@ document.getElementById("loginForm")?.addEventListener("submit", async function 
     const password = document.getElementById("password").value;
 
     try {
-		//Wysłanie zapytania POST /login do backendu
-        const response = await fetch("https://wm-backend-g4xy.onrender.com/login", {
-			method: "POST",
-			headers: { "Content-Type": "application/x-www-form-urlencoded" },
-			body: new URLSearchParams({
-				username,
-				password
-		})
-	});
+        const response = await fetch(`${BACKEND_URL}/login`, {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams({ username, password })
+        });
 
         if (!response.ok) {
             const errorData = await response.json();
-			alert("Błąd logowania: " + (errorData.detail || JSON.stringify(errorData)));
-
+            alert("Błąd logowania: " + (errorData.detail || JSON.stringify(errorData)));
             return;
         }
-		//Odbieranie danych z odpowiedzi
+
         const data = await response.json();
         const token = data.token;
         const role = data.role;
 
-        // Zapisanie tokena
         localStorage.setItem("token", token);
 
-        // Przekierowanie na odpowiednią stronę po zalogowaniu
         if (role === "admin") {
             window.location.href = "admin/adminPage.html";
         } else {
@@ -50,7 +46,6 @@ document.getElementById("registerForm")?.addEventListener("submit", async functi
     const password = document.getElementById("newPassword").value;
     const confirmPassword = document.getElementById("confirmPassword").value;
 
-    // Walidacja hasła
     const length = password.length >= 8;
     const lowercase = /[a-z]/.test(password);
     const uppercase = /[A-Z]/.test(password);
@@ -68,7 +63,7 @@ document.getElementById("registerForm")?.addEventListener("submit", async functi
     }
 
     try {
-        const response = await fetch("https://wm-backend-g4xy.onrender.com/users", {
+        const response = await fetch(`${BACKEND_URL}/users`, {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: new URLSearchParams({
@@ -137,7 +132,7 @@ function updateStatus(id, condition) {
     } else {
         el.classList.remove("valid");
     }
-} 
+}
 
 // Sprawdzenie, czy hasła się zgadzają
 document.getElementById("newPassword")?.addEventListener("input", checkPasswordMatch);
