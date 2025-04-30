@@ -1,5 +1,5 @@
 // === KONFIGURACJA ===
-const BACKEND_URL = "https://158f-37-47-71-1.ngrok-free.app"; // ← NGROK LINK
+const BACKEND_URL = "https://158f-37-47-71-1.ngrok-free.app"; // Adres z ngrok
 
 // Obsługa logowania użytkownika
 document.getElementById("loginForm")?.addEventListener("submit", async function (event) {
@@ -11,8 +11,8 @@ document.getElementById("loginForm")?.addEventListener("submit", async function 
     try {
         const response = await fetch(`${BACKEND_URL}/login`, {
             method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: new URLSearchParams({ username, password })
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username, password })
         });
 
         if (!response.ok) {
@@ -65,8 +65,8 @@ document.getElementById("registerForm")?.addEventListener("submit", async functi
     try {
         const response = await fetch(`${BACKEND_URL}/users`, {
             method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: new URLSearchParams({
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
                 username,
                 password,
                 role: "user"
