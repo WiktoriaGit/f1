@@ -1,5 +1,5 @@
 // === KONFIGURACJA ===
-const BACKEND_URL = "http://localhost:8000"; // lokalny backend
+const BACKEND_URL ="https://0b7d-37-47-71-1.ngrok-free.app"; // lokalny backend
 
 // Obsługa logowania użytkownika
 document.getElementById("loginForm")?.addEventListener("submit", async function (event) {
